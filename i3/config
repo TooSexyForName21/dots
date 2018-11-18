@@ -1,0 +1,341 @@
+######################################################
+#       General settings, binds and commands:        #
+######################################################
+    set $mod Mod4
+
+    # set $TERMINAL miniterm
+    set $TERMINAL   termite
+    set $EDITOR     vim
+    set $BROWSER    firefox
+
+    set $HOME       /home/lidor
+    set $PICTURES   /home/lidor/Pictures
+    set $WALLPAPERS /home/lidor/Pictures/Wallpapers
+    set $I3_PATH    /home/lidor/.config/i3
+    set $DAEMONS    /home/lidor/daemons
+
+
+# CUZ FUCK FIREFOX CTRL+Q (ctrl+q closes firefox)
+	bindsym ctrl+q exec bash -c true
+
+# Font for window titles. Will also be used by the bar unless a different font is used in the bar settings.
+	font pango:DejaVu Sans 12
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+	floating_modifier $mod
+
+# start a terminal
+	bindsym $mod+Return exec --no-startup-id $TERMINAL
+
+# reload the configuration file
+	bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+	bindsym $mod+Shift+r restart
+
+
+##############################
+#       Manage windows:      #
+##############################
+
+# kill focused window
+	bindsym $mod+Shift+q kill
+
+# change focus
+	bindsym $mod+h focus left
+	bindsym $mod+j focus down
+	bindsym $mod+k focus up
+	bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+	bindsym $mod+Left  focus left
+	bindsym $mod+Down  focus down
+	bindsym $mod+Up    focus up
+	bindsym $mod+Right focus right
+
+# move focused window
+	bindsym $mod+Shift+h move left
+	bindsym $mod+Shift+j move down
+	bindsym $mod+Shift+k move up
+	bindsym $mod+Shift+l move right
+
+	bindsym $mod+Shift+Left  move left
+	bindsym $mod+Shift+Down  move down
+	bindsym $mod+Shift+Up    move up
+	bindsym $mod+Shift+Right move right
+
+    bindsym $mod+Shift+less     move container to output left
+    bindsym $mod+Shift+greater  move container to output right
+    bindsym $mod+ctrl+less      move workspace to output left
+    bindsym $mod+ctrl+greater   move workspace to output right
+
+# window resize
+    bindsym $mod+Ctrl+Right       resize shrink width  1 px or 1 ppt
+    bindsym $mod+Ctrl+Up          resize grow   height 1 px or 1 ppt
+    bindsym $mod+Ctrl+Down        resize shrink height 1 px or 1 ppt
+    bindsym $mod+Ctrl+Left        resize grow   width  1 px or 1 ppt
+
+    bindsym $mod+Shift+Ctrl+Right resize shrink width  10 px or 10 ppt
+    bindsym $mod+Shift+Ctrl+Up    resize grow   height 10 px or 10 ppt
+    bindsym $mod+Shift+Ctrl+Down  resize shrink height 10 px or 10 ppt
+    bindsym $mod+Shift+Ctrl+Left  resize grow   width  10 px or 10 ppt
+
+# split in horizontal orientation
+	bindsym $mod+g split h
+
+# split in vertical orientation
+	bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+	bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+	bindsym $mod+s layout stacking
+	bindsym $mod+w layout tabbed
+	bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+	bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+	bindsym $mod+space focus mode_toggle
+
+# gaps
+	for_window [class="^.*"] border pixel 0
+	smart_gaps on
+	# gaps inner 10
+    # gaps outer 10
+
+# focus the parent container
+	bindsym $mod+a focus parent
+
+# focus the child container
+    # bindsym $mod+d focus child
+
+
+#########################
+#       Workspaces:     #
+#########################
+
+# Define names for default workspaces for which we configure key bindings later on.
+	set $ws1  "1"
+	set $ws2  "2"
+	set $ws3  "3"
+	set $ws4  "4"
+	set $ws5  "5"
+	set $ws6  "6"
+	set $ws7  "7"
+	set $ws8  "8"
+	set $ws9  "9"
+	set $ws10 "10"
+	set $ws11  "11"
+	set $ws12  "12"
+	set $ws13  "13"
+	set $ws14  "14"
+	set $ws15  "15"
+	set $ws16  "16"
+	set $ws17  "17"
+	set $ws18  "18"
+	set $ws19  "19"
+	set $ws20  "20"
+
+# switch to workspace
+	bindsym $mod+1 workspace $ws1
+	bindsym $mod+2 workspace $ws2
+	bindsym $mod+3 workspace $ws3
+	bindsym $mod+4 workspace $ws4
+	bindsym $mod+5 workspace $ws5
+	bindsym $mod+6 workspace $ws6
+	bindsym $mod+7 workspace $ws7
+	bindsym $mod+8 workspace $ws8
+	bindsym $mod+9 workspace $ws9
+	bindsym $mod+0 workspace $ws10
+	bindsym $mod+Ctrl+1 workspace $ws11
+	bindsym $mod+Ctrl+2 workspace $ws12
+	bindsym $mod+Ctrl+3 workspace $ws13
+	bindsym $mod+Ctrl+4 workspace $ws14
+	bindsym $mod+Ctrl+5 workspace $ws15
+	bindsym $mod+Ctrl+6 workspace $ws16
+	bindsym $mod+Ctrl+7 workspace $ws17
+	bindsym $mod+Ctrl+8 workspace $ws18
+	bindsym $mod+Ctrl+9 workspace $ws19
+	bindsym $mod+Ctrl+0 workspace $ws20
+
+# move focused container to workspace
+	bindsym $mod+Shift+1 move container to workspace $ws1
+	bindsym $mod+Shift+2 move container to workspace $ws2
+	bindsym $mod+Shift+3 move container to workspace $ws3
+	bindsym $mod+Shift+4 move container to workspace $ws4
+	bindsym $mod+Shift+5 move container to workspace $ws5
+	bindsym $mod+Shift+6 move container to workspace $ws6
+	bindsym $mod+Shift+7 move container to workspace $ws7
+	bindsym $mod+Shift+8 move container to workspace $ws8
+	bindsym $mod+Shift+9 move container to workspace $ws9
+	bindsym $mod+Shift+0 move container to workspace $ws10
+	bindsym $mod+Ctrl+Shift+1 move container to workspace $ws11
+	bindsym $mod+Ctrl+Shift+2 move container to workspace $ws12
+	bindsym $mod+Ctrl+Shift+3 move container to workspace $ws13
+	bindsym $mod+Ctrl+Shift+4 move container to workspace $ws14
+	bindsym $mod+Ctrl+Shift+5 move container to workspace $ws15
+	bindsym $mod+Ctrl+Shift+6 move container to workspace $ws16
+	bindsym $mod+Ctrl+Shift+7 move container to workspace $ws17
+	bindsym $mod+Ctrl+Shift+8 move container to workspace $ws18
+	bindsym $mod+Ctrl+Shift+9 move container to workspace $ws19
+	bindsym $mod+Ctrl+Shift+0 move container to workspace $ws20
+
+# Allow toggling between workspaces
+workspace_auto_back_and_forth yes
+bindsym $mod+grave workspace back_and_forth
+
+# On Startup
+    exec_always --no-startup-id /usr/lib/gnome-settings-daemon          # To get the gnome daemon running
+    exec_always --no-startup-id /usr/lib/gsd-a11y-settings
+    exec_always --no-startup-id /usr/lib/gsd-backlight-helper
+    exec_always --no-startup-id /usr/lib/gsd-clipboard
+    exec_always --no-startup-id /usr/lib/gsd-color
+    exec_always --no-startup-id /usr/lib/gsd-datetime
+    exec_always --no-startup-id /usr/lib/gsd-disk-utility-notify
+    exec_always --no-startup-id /usr/lib/gsd-dummy
+    exec_always --no-startup-id /usr/lib/gsd-housekeeping
+    exec_always --no-startup-id /usr/lib/gsd-keyboard
+    exec_always --no-startup-id /usr/lib/gsd-locate-pointer
+    exec_always --no-startup-id /usr/lib/gsd-media-keys
+    exec_always --no-startup-id /usr/lib/gsd-mouse
+    exec_always --no-startup-id /usr/lib/gsd-power
+    exec_always --no-startup-id /usr/lib/gsd-printer
+    exec_always --no-startup-id /usr/lib/gsd-print-notifications
+    exec_always --no-startup-id /usr/lib/gsd-rfkill
+    exec_always --no-startup-id /usr/lib/gsd-screensaver-proxy
+    exec_always --no-startup-id /usr/lib/gsd-sharing
+    exec_always --no-startup-id /usr/lib/gsd-smartcard
+    exec_always --no-startup-id /usr/lib/gsd-sound
+    exec_always --no-startup-id /usr/lib/gsd-wacom
+    exec_always --no-startup-id /usr/lib/gsd-wacom-led-helper
+    exec_always --no-startup-id /usr/lib/gsd-wacom-oled-helper
+    exec_always --no-startup-id /usr/lib/gsd-xsettings
+
+    exec_always --no-startup-id feh --bg-fill "$WALLPAPERS/spring_tranquility-wallpaper-3840x2160.jpg"
+    exec_always --no-startup-id "setxkbmap -layout us,il && setxkbmap -option 'grp:alt_shift_toggle' & disown"        # Load keymaps
+    exec_always --no-startup-id "picom -b"                                                                            # Start Picom (aka Compton)
+    exec_always --no-startup-id "$HOME/.config/polybar/launch_polybar.sh"                                             # Start polybar launcher
+    exec_always --no-startup-id xrandr --dpi 270                                                                      # Set dpi to 220
+	exec_always --no-startup-id nm-applet                                                                             # Start nm-applet by default
+    # exec --no-startup-id bash -c "pgrep spotify            || spotify"                                      # Start Spotify
+    # exec --no-startup-id bash -c "pgrep slack              || slack"                                        # Start Slack
+    # exec --no-startup-id bash -c "pgrep mailspring         || mailspring"                                   # Start MailSpring
+    exec_always --no-startup-id python /home/lidor/.config/i3/dd_spawner.py  # Start dd_spawner.py
+    # exec --no-startup-id bash -c "pgrep bat_level.sh       || $DAEMONS/bat_level.sh"                        # Start the script that notifies about low battery
+    exec --no-startup-id bash -c "pgrep monitors.sh        || $DAEMONS/monitors.sh"                         # Start monitors.sh (turns on the laptop monitor when it's the only one)
+    exec --no-startup-id bash -c "pgrep gnome-screensaver  || gnome-screensaver"
+
+    # exec_always --no-startup-id bash -c "wmctrl -l | grep '\(Jira - Mozilla Firefox\|about:sessionrestore\)' || firefox -new-window https://pagaya.atlassian.net/secure/RapidBoard.jspa?projectKey=DATA"          # Start Jira
+
+
+######################################################
+#           Lock, Suspend and other modes:           #
+######################################################
+
+# Set locker for less typing
+    # set $Locker ~/.config/i3/lock_screen.sh ~/Pictures/Wallpapers/milky_way_12-wallpaper-1920x1080.jpg
+    set $Locker gnome-screensaver-command -l
+    set $spotify_stop playerctl pause
+
+# Show message telling about all the possible modes
+    set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+
+# Handle all the different modes
+    mode "$mode_system" {
+        bindsym       l exec --no-startup-id $spotify_stop && $Locker, mode "default"                                         # Lock
+        bindsym       h exec --no-startup-id "$spotify_stop; systemctl suspend; $Locker", mode "default"                      # Hibername & lock
+        bindsym       s exec --no-startup-id "$spotify_stop; systemctl suspend; $Locker", mode "default"                      # Suspend & lock
+        bindsym       r exec --no-startup-id systemctl reboot                                                                 # Reboot
+        bindsym       e exec --no-startup-id i3-msg exit                                                                      # Exit from i3
+        bindsym Shift+s exec --no-startup-id systemctl poweroff -i                                                            # Shutdown
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+    }
+
+# Bind the menu to $mod+shift+x
+    bindsym $mod+shift+x mode "$mode_system"
+
+
+####################################################
+#       Default states for certain windows:        #
+####################################################
+
+# Spotify:
+    assign [class="Spotify"] $ws10
+    for_window [class="Spotify"] move to workspace $ws10
+
+# Discord:
+    assign [class="discord"] $ws10
+    for_window [class="discord"] move to workspace $ws10
+
+# Calculator:
+    for_window [title="Calculator"] floating enable
+
+# Slack, MailSpring, Jira:
+    assign [class="Slack"] $ws9
+    for_window [class="Slack"] move to workspace $ws9
+    assign [class="Mailspring"] $ws9
+    for_window [class="Mailspring"] move to workspace $ws9
+    assign [title="^.*Jira.*$"] $ws9
+    for_window [title="^.*Jira.*$"] move to workspace $ws9
+
+
+#################################
+#       Custom Keybinds:        "
+#################################
+
+# screenshot
+    #                                        maim -su | convert - \( +clone -background black -shadow 80x20+0+15 \) +swap -background transparent -layers merge +repage png:- | xclip -selection clipboard -t image/png
+	bindsym --release Print exec             sh -c 'maim -su "$PICTURES/Screenshots/$(date '+%d.%m.%Y-%T').png"'
+    # bindsym --release Shift+Print exec       sh -c 'maim "$PICTURES/Screenshots/$(date '+%d.%m.%Y-%T').png"'
+	bindsym --release $mod+Print exec        sh -c 'maim -su | xclip -selection clipboard -t image/png'
+	# bindsym --release Ctrl+Shift+Print exec  sh -c 'maim | xclip -selection clipboard -t image/png'
+
+# Rofi
+	bindsym --release Mod1+Tab exec rofi -combi-modi window -show window -theme solarized-darker -show-icons -font "System San Francisco Display 22" -no-fixed-num-lines -display-window ">>> "
+	bindsym --release $mod+d exec   rofi -combi-modi drun   -show drun   -theme solarized-darker -lines 15 -show-icons -font "System San Francisco Display 22" -display-drun ">>> "
+
+	bindsym $mod+o exec --no-startup-id        "$BROWSER -new-window"
+	bindsym $mod+shift+o exec --no-startup-id  "$I3_PATH/ducksearch"
+	bindsym $mod+shift+t exec --no-startup-id  "$I3_PATH/todo"
+	bindsym $mod+ctrl+m exec --no-startup-id   "$I3_PATH/dmenu_mount"
+	bindsym $mod+b exec --no-startup-id        "$I3_PATH/xqcr"
+
+    # bindsym $mod+Shift+Delete exec --no-startup-id pactl set-sink-mute `pacmd list-sinks | awk '/* index:/{print $3}'` 1; workspace 0; exec $TERMINAL -e 'vim /home/lidor/.config/i3/config'; # Porno mode
+    
+# multimedia keys enable
+    bindsym XF86AudioMute exec --no-startup-id        pactl set-sink-mute   `pacmd list-sinks | awk '/* index:/{print $3}'` toggle
+    bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume `pacmd list-sinks | awk '/* index:/{print $3}'` +3%
+    bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume `pacmd list-sinks | awk '/* index:/{print $3}'` -3%
+
+# Spotify media keys
+    bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+    bindsym XF86AudioNext exec --no-startup-id playerctl next
+    bindsym XF86AudioPrev exec --no-startup-id playerctl previous
+
+# Sreen brightness controls
+    # bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 # increase screen brightness
+    # bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10  # decrease screen brightness
+    bindsym XF86MonBrightnessUp exec --no-startup-id   sudo $daemons/brightness.sh +
+    bindsym XF86MonBrightnessDown exec --no-startup-id sudo $daemons/brightness.sh -
+
+# Monitors
+    bindsym $mod+Mod1+1 exec bash -c 'xrandr --output eDP-1 --primary --auto && xrandr -q | grep "\bconnected\b" | awk "!/eDP/{print \$1}" | xargs -i xrandr --output {} --off && sh $HOME/.config/polybar/launch_polybar.sh'
+    bindsym $mod+Mod1+2 exec bash -c 'xrandr --auto && xrandr --output eDP-1 --off && sh $HOME/.config/polybar/launch_polybar.sh'
+
+# Dropdowns
+    for_window [title="^dropdown_.*$"] floating enable
+    for_window [title="^dropdown_.*$"] move scratchpad
+    for_window [title="^dropdown_.*$"] sticky enable
+    for_window [title="^dropdown_.*$"] border pixel 10
+    for_window [title="^dropdown_.*$"] resize set width 1920
+    for_window [title="^dropdown_.*$"] resize set height 1080
+
+    bindsym $mod+t      [ title="^dropdown_terminal$"] scratchpad show;  [ title="^dropdown_terminal$"]  move position center
+    bindsym $mod+ctrl+r [ title="^dropdown_ranger$"]   scratchpad show;  [ title="^dropdown_ranger$"]    move position center
+    bindsym $mod+p      [ title="^dropdown_python$"]   scratchpad show;  [ title="^dropdown_python$"]    move position center

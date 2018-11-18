@@ -1,0 +1,210 @@
+export LANG=en_US.UTF-8
+
+# sources
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+export ZSH="/home/lidor/.oh-my-zsh"
+export PATH=$PATH:/usr/local/share/npm/bin
+export PATH=$PATH:~/.local/bin/
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+# ZSH_THEME="robbyrussell"
+# ZSH_THEME='ys'
+# ZSH_THEME='agnoster'
+ZSH_THEME='powerlevel9k/powerlevel9k'
+
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
+
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+HIST_STAMPS="dd.mm.yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load?
+# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git zsh-autosuggestions)
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+
+# Preferred editor for local and remote sessions
+export EDITOR='vim'
+
+# Compilation flags
+export ARCHFLAGS="-arch x86_64"
+
+# ssh
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# laziness
+alias inst='sudo pacman -S'
+alias uninst='sudo pacman -Rsn'
+alias update='sudo pacman -Syuu'
+alias please='sudo $(fc -ln -1)'
+alias fuck='sudo $(fc -ln -1)'
+alias fk='sudo $(fc -ln -1)'
+
+alias psqlPort="ss -lpn | grep 'postgresql' | grep -oP '\d+' | sed -n '3p'"
+
+alias l='lsd -l --color=auto'
+alias lf='lsd -la --color=auto'
+alias lfh='lsd -la --color=auto'
+
+alias bashrc='vim ~/.bashrc'
+alias zshrc='vim ~/.zshrc'
+alias i3config='vim ~/.config/i3/config'
+
+alias xclip='xclip -selection clipboard'
+
+alias copy='tar cvfz - "$1" | (cd "$2"; tar xvfz -)'
+
+alias neofetch='neofetch --ascii ~/.config/neofetch/shrekscii --ascii_colors 2 5 6 1'
+
+# my common typos
+alias clera='clear'
+alias claer='clear'
+alias cler='clear'
+
+alias cd..='cd ..'
+
+# JetBrains
+alias box="/home/lidor/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox & disown"
+
+alias ls='l --color=auto'
+alias df='df -h' # Human readable sizes
+alias cp='cp -i' # Ask for confirmation before overwriting
+alias free='free -m' # Show sizes in MBs
+
+# 2048 terminal game
+alias 2048='~/Games/2048.exe'
+
+# list all packages sorted by size:
+alias listAllBySize="pacman -Qi | awk '/^Name/{name=$3} /^Installed Size/{print $4$5, name}' | sort -h"
+alias list_all_by_size=listAllBySize
+
+# Screenshots
+screenshot()
+{
+	if [ "$#" -ne 2 ]; then
+		scrot ~/Pictures/$1;
+	else
+		scrot ~/Pictures/$1 -d "$2" -c;
+	fi
+        gimp ~/Pictures/$1 & disown;
+}
+
+monitors()
+{
+	if [ "$1" = "def" ] || [ "$1" = "default" ]; then
+		xrandr --output HDMI2 --off --output HDMI1 --off --output DP1 --off --output eDP1 --primary --mode 1366x768 --scale-from 1920x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off;
+
+	elif [ "$1" = "home" ]; then
+		xrandr --output HDMI2 --off --output HDMI1 --primary --mode 1920x1080 --pos 1280x88 --rotate normal --output DP1 --mode 1280x1024 --pos 0x0 --rotate normal --output eDP1 --off --output VIRTUAL1 --off;
+
+	elif [ "$1" = "high" ]; then
+		xrandr --output HDMI2 --off --output HDMI1 --off --output DP1 --off --output eDP1 --primary --mode 1366x768 --pos 0x0 --rotate normal --output VIRTUAL1 --off;
+
+	else
+		echo 'ERROR';
+	fi
+	echo 'Done';
+}
+
+wifi()
+{
+	if [ "$1" = "scan" ] || [ "$1" = "list" ]; then
+		nmcli dev wifi rescan && nmcli dev wifi;
+
+	elif [ "$1" = "off" ] || [ "$1" = "on" ]; then
+		nmcli radio wifi "$1";
+
+	elif [ "$1" = "connect" ]; then
+		if [ -z "$3" ]; then
+			nmcli dev wifi connect "$2";
+		else
+			nmcli dev wifi connect "$2" password "$3";
+		fi
+	fi
+}
+
+# start bicon for Biderctional text
+alias exit='kill -9 $(ps -p $PPID -o ppid=)'
+if ! [[ "$(ps -p $(ps -p $(echo $$) -o ppid=) -o comm=)" =~ 'bicon'* ]]; then
+    bicon.bin
+fi
+
+
+# SSH PAGAYA VM'S
+vm() {
+    USER=${2:-"lidor"}
+
+    if [ "$#" -eq 0 ]; then
+        echo "Give at least one argument"
+    else
+        ssh -i ~/.ssh/.remote-research $USER@research-$1.westeurope.cloudapp.azure.com
+    fi
+}

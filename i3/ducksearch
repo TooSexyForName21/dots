@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# Gives a dmenu prompt to search DuckDuckGo.
+# Without input, will open DuckDuckGo.com.
+# URLs will be directly handed to firefox.
+# Anything else, it search it.
+
+pgrep -x dmenu && exit
+
+shopt -s nocasematch
+FIREFOX="firefox -new-window"
+
+choice=$(dmenu -i -p "Search DuckDuckGo:") || exit 1
+
+if [ "$choice" = "🦆"  ]; then
+    $FIREFOX "https://duckduckgo.com"
+else
+    # Detect if url
+    if [[ "$choice" =~ ^(http:\/\/|https:\/\/)?[a-zA-Z0-9]+\.[a-zA-Z]+(/)?.*$ ]]; then
+        $FIREFOX "$choice"
+    else
+        case $choice in 
+            # Azure portal:
+            "portal") $FIREFOX "https://portal.azure.com/" ;;
+
+            # Amazon console:
+            "console" | "aws") $FIREFOX "https://aws.amazon.com/console/" ;;
+            "ecs" | "ec2" | "ecr" | "s3" | "vpc" | "rds" | "iam") $FIREFOX "https://us-west-1.console.aws.amazon.com/$choice/" ;;
+
+            # GitHub:
+            "gp") $FIREFOX "https://github.com/pagaya" ;;
+            "gpr") $FIREFOX "https://github.com/pagaya/research" ;;
+            "gpdd") $FIREFOX "https://github.com/pagaya/datadeployments" ;;
+            "gpi") $FIREFOX "https://github.com/pagaya/inbox" ;;
+
+            # Pagaya teamcity:
+            "teamcity" | "tc") $FIREFOX "https://teamcity.pagaya-services.com";;
+
+            # Virtual Machines stylesheet:
+            "vm sheet") $FIREFOX "https://docs.google.com/spreadsheets/d/1zYHes6GYUmKzjszVEIV1CQNybjSHttrcTCSDvDZFsrI/edit#gid=0" ;;
+
+            # TU Mail stylesheet:
+            "tu" | "tu mail") $FIREFOX "https://docs.google.com/spreadsheets/d/1B6QehEacEwvcJrW6WzN8-Pm6U_eTOTwSuhgPRnvgISE/edit#gid=0" ;;
+
+            "jira") $FIREFOX "https://pagaya.atlassian.net/secure/RapidBoard.jspa?projectKey=DATA" ;;
+
+            "food") $FIREFOX "https://www.10bis.co.il/next/restaurants/search/delivery/24-65625-121-3960935" ;;
+
+            "yum") $FIREFOX "https://www.10bis.co.il/next/restaurants/menu/delivery/25541/%D7%A9%D7%92%D7%91-%D7%A7%D7%95%D7%A0%D7%A1%D7%A4%D7%98" ;;
+
+            # Fallback, aka DDG-search it:
+            *) $FIREFOX "https://duckduckgo.com/?q=$choice&t=ffab&atb=v1-1" ;;
+        esac
+    fi
+fi

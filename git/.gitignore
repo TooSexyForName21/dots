@@ -1,0 +1,6 @@
+.idea
+tags
+Session.vim
+.venv
+.mypy_cache/
+.vscode
